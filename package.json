@@ -1,0 +1,26 @@
+{
+  "name": "gas-livereload",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "preinit": "rimraf ./build && mkdirp ./build",
+    "init": "clasp create --type sheets --title \"Addon\" --rootDir ./build",
+    "postinit": "mv ./build/.clasp.json ./.clasp.json && rimraf ./build",
+    "setup": "rimraf ./build && mkdirp ./build && cpy --flat ./gas/appsscript.json ./gas/Code.js ./build",
+    "install:https": "mkdirp ./certs && mkcert -key-file ./certs/key.pem -cert-file ./certs/cert.pem localhost 127.0.0.1",
+    "build:client": "pnpm -r --stream --filter=\"client\" build",
+    "build:dev": "pnpm -r --stream --filter=\"dev\" build",
+    "dev": "pnpm -r --stream --filter=\"client\" dev",
+    "clasp:push": "clasp push"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "cpy-cli": "^4.2.0",
+    "mkdirp": "^2.1.5",
+    "rimraf": "^4.4.0"
+  }
+}
